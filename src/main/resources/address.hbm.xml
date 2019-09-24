@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 5.4//EN"
+        "http://hibernate.org/dtd//hibernate-mapping.dtd">
+
+<hibernate-mapping>
+    <class name="de.johngockel.example.hibernate.Address" table="JG_ADDRESS">
+        <id name="id" column="ADDRESS_ID">
+            <generator class="increment"></generator>
+        </id>
+
+        <property name="town" column="TOWN"></property>
+        <property name="postcode" column="POSTCODE"></property>
+        <property name="country" column="COUNTRY"></property>
+
+        <joined-subclass name="de.johngockel.example.hibernate.StreetAddress" table="JG_ADDRESS_STREET">
+            <key column="ADDRESS_ID"></key>
+
+            <property name="street" column="STREET"></property>
+            <property name="houseNumber" column="HOUSE_NUMBER"></property>
+        </joined-subclass>
+        <joined-subclass name="de.johngockel.example.hibernate.POBoxAddress" table="JG_ADDRESS_POBOX">
+            <key column="ADDRESS_ID"></key>
+
+            <property name="poBoxNumber" column="PO_BOX_NUMBER"></property>
+        </joined-subclass>
+    </class>
+
+</hibernate-mapping>
